@@ -11,13 +11,13 @@ import os
 #
 # Where:
 #
-#   path_to_db: the path to the sqlite3 database file. default is 
+#   path_to_db: the path to the sqlite3 database file. default is
 #               "data/movies.db"
-# 
-#   path_to_sql: the path to the file containing the sql query. default is 
+#
+#   path_to_sql: the path to the file containing the sql query. default is
 #               "sql/horror_movies.sql"
-# 
-#   path_to_csv: the path to the csv file that will be created with the results 
+#
+#   path_to_csv: the path to the csv file that will be created with the results
 #               of the query. default is "data/movies.csv"
 
 
@@ -27,7 +27,7 @@ def get_paths() -> tuple:
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("db", nargs="?",
-                        help="path to the sqlite3 database file", 
+                        help="path to the sqlite3 database file",
                         default="db/movies.db")
     parser.add_argument("sql", nargs="?",
                         help="path to the file containing the sql query",
@@ -70,11 +70,11 @@ def main() -> None:
     path_to_db, path_to_sql, path_to_csv = get_paths()
     conn = create_connection(path_to_db)
     sql = get_sql(path_to_sql)
-    
+
     if sql == "-- Add your SQL here" or sql == "":
         print("Error: Add your sql to the sql/horror_movies.sql file before running.")
         exit(1)
-    
+
     if conn is not None:
         movies = pd.read_sql(sql, conn)
 
@@ -91,7 +91,7 @@ def main() -> None:
     else:
         print("Error: Could not connect to database.")
         exit(1)
-        
+
     conn.close()
 
     return None
